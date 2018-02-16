@@ -1,0 +1,168 @@
+/**
+* background-color: rgb(235, 249, 248)
+* color: rgb(31, 60, 61)
+* height: 36px
+*/
+.treeWrap{box-sizing: border-box; overflow: hidden; height: 100%;}
+
+ul.ztree{
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /*color: rgb(31, 60, 61);*/
+  color: #000;
+  padding: 0;
+}
+
+ul.ztree * {
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  box-sizing: border-box;
+}
+
+.ztree li {line-height: 36px;}
+/*.ztree li:hover{background-color: rgb(235, 249, 248);}*/
+/*.ztree li:hover > [treenode_a]{color: #00b1a5; background-color: rgb(235, 249, 248);}*/
+.ztree [treenode_a]:hover {color: #00b1a5; background-color: rgb(235, 249, 248);}
+/*.ztree li:hover > a{color: #00b1a5; background-color: rgb(235, 249, 248);}*/
+/*.ztree li:hover > ul, .ztree li:hover > ul li {background-color: transparent;}*/
+
+.ztree li a, .ztree li a:hover{
+  min-width: calc(100% - 12px - 18px - 5px - 5px);  /* 100% - 箭头 - checkbox - padding-left - ztree-padding */
+  height: 100%;
+  line-height: 36px;
+  text-decoration: none;
+  padding-right: 0;
+  padding-left: 5px;
+}
+/*只有箭头*/
+.ztree li span.button.switch + a {width: calc(100% - 12px - 5px);}
+/*无选择框及子节点*/
+.ztree li span.button.switch.noline_docu {display: none;}
+.ztree li span.button.switch.noline_docu + a{width: 100%;}
+.ztree li a.curSelectedNode{
+  /*color: rgb(31, 60, 61);*/
+  /*background-color: transparent;*/
+  color: #00b1a5;
+  background-color: rgb(235, 249, 248);
+  height: 100%;
+  line-height: 36px;
+}
+
+/*隐藏文件按钮*/
+.ztree li a span.button, .ztree li a span.button.ico_close{
+  vertical-align: middle;
+  display: none;
+}
+
+/*展开按钮*/
+.ztree li span.button.switch{
+  background: none;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 6px solid transparent;
+  border-right-width: 0;
+  border-left-color: rgb(151, 187, 190);
+  border-left-width: 7px;
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+  transition: transform .3s ease-in-out;
+}
+.ztree li span.button[class*=open]{   /*.noline_open*/
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/*叶子节点*/
+.ztree li span.button.center_docu, .ztree li span.button.bottom_docu, .ztree li span.button.noline_docu{
+  /*background: none;*/
+  width: 7px;
+  height: 12px;
+  border: 0;
+}
+
+/*checkbox*/
+/* 未选中 */
+.ztree li span.button.chk{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  border: 1px solid rgb(191, 216, 217);
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  z-index: 1;
+  transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+  background: #fff none;    /* 去掉按钮图标 */
+}
+.ztree li span.button.chk::after {
+  box-sizing: content-box;
+  content: "";
+  border: 2px solid #fff;
+  border-left: 0;
+  border-top: 0;
+  height: 8px;
+  left: 5px;
+  position: absolute;
+  top: 1px;
+  -ms-transform: rotate(45deg) scaleY(0);
+  transform: rotate(45deg) scaleY(0);
+  width: 4px;
+  transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+  -ms-transform-origin: center;
+  transform-origin: center;
+}
+
+/* 选中，全选状态 */
+.ztree li span.button.chk.checkbox_true_full, .ztree li span.button.chk.checkbox_true_full_focus,
+.ztree li span.button.chk.checkbox_true_part, .ztree li span.button.chk.checkbox_true_part_focus{
+  background-color: #00b0a4;
+  border-color: rgb(1, 162, 152);
+}
+.ztree li span.button.chk.checkbox_true_full::after, .ztree li span.button.chk.checkbox_true_full_focus::after,
+.ztree li span.button.chk.checkbox_true_part::after, .ztree li span.button.chk.checkbox_true_part_focus::after {
+  -ms-transform: rotate(45deg) scaleY(1);
+  transform: rotate(45deg) scaleY(1);
+}
+
+/* 半选状态 */
+.ztree li span.button.chk.checkbox_false_part, .ztree li span.button.chk.checkbox_false_part_focus{
+  background-color: #00b0a4;
+  border-color: rgb(1, 162, 152);
+}
+.ztree li span.button.chk.checkbox_false_part:before, .ztree li span.button.chk.checkbox_false_part_focus:before {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 1px solid #fff;
+  margin-top: -1px;
+  left: 3px;
+  right: 3px;
+  top: 50%;
+}
+
+/* disabled 状态 */
+.ztree li span.button.chk.checkbox_false_disable, .ztree li span.button.chk.checkbox_false_disable{
+  background-color: #eef1f6;
+  border-color: #d1dbe5;
+  cursor: not-allowed;
+}
+.ztree li span.button.chk.checkbox_false_disable.checkbox_false_part:before, .ztree li span.button.chk.checkbox_false_disable.checkbox_false_part:before {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 1px solid #fff;
+  margin-top: -1px;
+  left: 3px;
+  right: 3px;
+  top: 50%;
+}
+.ztree li span.button.chk.checkbox_false_disable.checkbox_true_full:before, .ztree li span.button.chk.checkbox_false_disable.checkbox_true_full:before {
+  transform: rotate(45deg) scaleY(1);
+}

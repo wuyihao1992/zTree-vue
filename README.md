@@ -1,0 +1,2 @@
+这是一个用Vue封装的zTree组件，zTree的源码为js，css目录下的文件。如需更多zTree功能需自行下载zTree JS文件并引入。
+该组件封装了基本的树的操作及功能，详细请看.vue或loadTree.js 下的注释
